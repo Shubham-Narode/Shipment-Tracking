@@ -1,0 +1,89 @@
+.app__container{
+    margin: 0;
+    padding: 0;
+    /* overflow-x: hidden; */
+    /* width: 90vw; */
+    /* height: 90vh; */
+  }
+  .app__header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+  }
+  .app__search{
+    width: 170px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  
+  .app__trackButton{
+    /* width: 150px; */
+    margin-left: 30px;
+    color: white;
+    background-color: rgb(3, 107, 243);
+    padding: 2 5px;
+    align-items: center;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 3px solid rgb(3, 107, 243);
+  }
+  
+  .app__backButton{
+    font-weight: 400;
+    width: 100px;
+    padding: 2 5px;
+    color: rgb(3, 107, 243);
+    margin-left: 850px;
+    border: 1px solid rgb(3, 107, 243);
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .app__backButton:hover{
+    color: white;
+    font-weight: 400;
+    background-color: rgb(3, 107, 243);
+  }
+  
+
+  
+  .app__tabs{
+    display: flex;
+    flex-direction: row;
+  justify-content: center;
+    margin-top: 30px;
+    font-weight: 700;
+  }
+  
+  .app__activityTab{
+    color: grey;
+    margin-left:1%;
+    padding:  5px 13%;
+    text-decoration: none;
+    box-shadow: 1.5px 0px 1.5px 1.5px gray;
+  }
+  
+  .app__mapTab{
+    color: grey;
+    padding:  5px 13%;
+    text-decoration: none;
+    box-shadow: 1px 0px 1px 1px gray;
+  }
+  
+  .app__detailsTab{
+    color: grey;
+    padding:  5px 13%;
+    text-decoration: none;
+    box-shadow: 1px 0px 1px 1px gray;
+  }
+
+  /* .active{
+    color: rgb(3, 107, 243);
+    text-decoration: none;
+    border-bottom:  4px solid rgb(3, 107, 243);
+    transform: scaleY(1.05);
+    letter-spacing: 1px;
+  } */

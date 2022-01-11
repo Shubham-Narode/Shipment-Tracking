@@ -1,0 +1,19 @@
+.milestone__heading{
+    margin-left: 100px;
+    font-weight: bold;
+    border-bottom: 2px solid rgb(3, 107, 243);
+    font-size: 20px;
+    color: rgb(3, 107, 243);
+    margin-bottom: 20px;
+    line-height: 60px;
+}
+.table_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 88vw;
+    padding: 2.5px 0;
+    margin-left: 6vw;
+    border: 1px solid rgb(3, 107, 243);
+    background-color: rgb(207, 222, 243);
+}

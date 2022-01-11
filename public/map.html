@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // var jsonData = {
+      //   id: 16203532,
+      //   shipmentsubscription_status: 2,
+      //   status_verbose: "completed",
+      //   current_vessel_nextport: null,
+      //   current_vessel_position: null,
+      //   current_vessel: null,
+      //   container_type_iso: "22GP",
+      //   container_type_str: "20 ft Standard Container",
+      //   shipmentsubscription_status_verbose: "completed",
+      //   shipmentsubscription_on_hold: false,
+      //   shipmentsubscription_id: 26567775,
+      //   lifecycle_status_verbose: "lifecycle completed",
+      //   tsp4_loc: null,
+      //   tsp3_loc: null,
+      //   tsp2_loc: {
+      //     name: "Valencia",
+      //     locode: "ESVLC",
+      //     timezone: "Europe/Madrid",
+      //     latitude: 39.45,
+      //     longitude: -0.316667,
+      //   },
+      //   tsp1_loc: {
+      //     name: "Colombo",
+      //     locode: "LKCMB",
+      //     timezone: "Asia/Colombo",
+      //     latitude: 6.95,
+      //     longitude: 79.85,
+      //   },
+      //   leg5_vessel: null,
+      //   leg4_vessel: null,
+      //   leg3_vessel: {
+      //     name: "AGAMEMNON",
+      //     imo: 9315381,
+      //     id: 22585,
+      //   },
+      //   leg2_vessel: {
+      //     name: "MSC TOKYO",
+      //     imo: 9318046,
+      //     id: 5701,
+      //   },
+      //   leg1_vessel: {
+      //     name: "OEL SHRAVAN",
+      //     imo: 9162368,
+      //     id: 12895,
+      //   },
+      //   dlv_loc: {
+      //     name: "Cologne",
+      //     locode: "DECGN",
+      //     timezone: "Europe/Berlin",
+      //     latitude: 50.943051,
+      //     longitude: 6.968413,
+      //   },
+      //   pod_loc: {
+      //     name: "Rotterdam",
+      //     locode: "NLRTM",
+      //     timezone: "Europe/Amsterdam",
+      //     latitude: 51.890054,
+      //     longitude: 4.324493,
+      //   },
+      //   pol_loc: {
+      //     name: "Tuticorin",
+      //     locode: "INTUT",
+      //     timezone: "Asia/Kolkata",
+      //     latitude: 8.8,
+      //     longitude: 78.166667,
+      //   },
+      //   origin_loc: {
+      //     name: "Tuticorin",
+      //     locode: "INTUT",
+      //     timezone: "Asia/Kolkata",
+      //     latitude: 8.8,
+      //     longitude: 78.166667,
+      //   },
+      //   carrier_name: "CMA CGM",
+      //   carrier_scac: "CMDU",
+      //   container_number: "CMAU0220674",
+      //   descriptive_name: null,
+      //   url: "https://capi.ocean-insights.com/containertracking/v2/shipments/16203532/",
+      //   shipmentsubscription:
+      //     "https://capi.ocean-insights.com/containertracking/v2/subscriptions/26567775/",
+      //   tags: [],
+      //   tsp1_vslarrival_prediction: null,
+      //   tsp2_vslarrival_prediction: null,
+      //   tsp3_vslarrival_prediction: null,
+      //   tsp4_vslarrival_prediction: null,
+      //   pod_vslarrival_prediction: null,
+      //   pod_discharge_prediction: null,
+      //   leg1_service: null,
+      //   leg2_service: null,
+      //   leg3_service: {
+      //     id: 6228,
+      //     code: "NEWMO",
+      //     name: "NEW NORTH EUROPE MEDITERRANEAN OCEANIA SERVICE",
+      //     direction: "EB",
+      //   },
+      //   leg4_service: null,
+      //   leg5_service: null,
+      //   pod_timeofarrival_warning: {
+      //     risk: 0,
+      //     risk_verbose: "No risk",
+      //     risk_description: "No plausibility issue in schedule",
+      //     conclusion: "Shipment will probably arrive on time",
+      //     predicted_time_of_arrival: null,
+      //     created: "2021-10-21T10:48+0000",
+      //     modified: "2021-10-25T18:15+0000",
+      //   },
+      //   empty_pickup_loc: {
+      //     name: "Tuticorin",
+      //     locode: "INTUT",
+      //     timezone: "Asia/Kolkata",
+      //     latitude: 8.8,
+      //     longitude: 78.166667,
+      //   },
+      //   availability_loc: null,
+      //   lif_loc: null,
+      //   empty_return_loc: {
+      //     name: "Cologne",
+      //     locode: "DECGN",
+      //     timezone: "Europe/Berlin",
+      //     latitude: 50.943051,
+      //     longitude: 6.968413,
+      //   },
+      //   incidents: [],
+      //   booking_number: null,
+      //   bl_number: "AID0217667",
+      //   weight: null,
+      //   status: 21,
+      //   lifecycle_status: 1,
+      //   id_date: "2021-08-23",
+      //   empty_pickup_planned_initial: null,
+      //   empty_pickup_planned_last: null,
+      //   empty_pickup_actual: "2021-08-23T12:21+0000",
+      //   origin_pickup_planned_initial: null,
+      //   origin_pickup_planned_last: null,
+      //   origin_pickup_actual: null,
+      //   pol_arrival_planned_initial: null,
+      //   pol_arrival_planned_last: null,
+      //   pol_arrival_actual: "2021-08-25T14:55+0000",
+      //   pol_loaded_planned_initial: null,
+      //   pol_loaded_planned_last: null,
+      //   pol_loaded_actual: "2021-08-26T20:29+0000",
+      //   pol_vsldeparture_planned_initial: null,
+      //   pol_vsldeparture_planned_last: null,
+      //   pol_vsldeparture_actual: null,
+      //   pol_vsldeparture_detected: "2021-08-27T13:35+0000",
+      //   leg1_voyage: "298G2R",
+      //   tsp1_vslarrival_planned_initial: null,
+      //   tsp1_vslarrival_planned_last: null,
+      //   tsp1_vslarrival_actual: null,
+      //   tsp1_vslarrival_detected: "2021-08-28T03:54+0000",
+      //   tsp1_discharge_planned_initial: null,
+      //   tsp1_discharge_planned_last: null,
+      //   tsp1_discharge_actual: "2021-08-28T18:59+0000",
+      //   tsp1_loaded_planned_initial: null,
+      //   tsp1_loaded_planned_last: null,
+      //   tsp1_loaded_actual: "2021-09-22T23:58+0000",
+      //   tsp1_vsldeparture_planned_initial: null,
+      //   tsp1_vsldeparture_planned_last: null,
+      //   tsp1_vsldeparture_actual: null,
+      //   tsp1_vsldeparture_detected: "2021-09-23T03:45+0000",
+      //   leg2_voyage: "0NNAMW1MA",
+      //   tsp2_vslarrival_planned_initial: null,
+      //   tsp2_vslarrival_planned_last: null,
+      //   tsp2_vslarrival_actual: null,
+      //   tsp2_vslarrival_detected: "2021-10-06T02:06+0000",
+      //   tsp2_discharge_planned_initial: null,
+      //   tsp2_discharge_planned_last: null,
+      //   tsp2_discharge_actual: "2021-10-07T13:53+0000",
+      //   tsp2_loaded_planned_initial: null,
+      //   tsp2_loaded_planned_last: null,
+      //   tsp2_loaded_actual: "2021-10-21T05:08+0000",
+      //   tsp2_vsldeparture_planned_initial: "2021-10-21T18:00+0000",
+      //   tsp2_vsldeparture_planned_last: "2021-10-21T18:00+0000",
+      //   tsp2_vsldeparture_actual: null,
+      //   tsp2_vsldeparture_detected: "2021-10-21T12:16+0000",
+      //   leg3_voyage: "0NNBHE1MA",
+      //   tsp3_vslarrival_planned_initial: null,
+      //   tsp3_vslarrival_planned_last: null,
+      //   tsp3_vslarrival_actual: null,
+      //   tsp3_vslarrival_detected: null,
+      //   tsp3_discharge_planned_initial: null,
+      //   tsp3_discharge_planned_last: null,
+      //   tsp3_discharge_actual: null,
+      //   tsp3_loaded_planned_initial: null,
+      //   tsp3_loaded_planned_last: null,
+      //   tsp3_loaded_actual: null,
+      //   tsp3_vsldeparture_planned_initial: null,
+      //   tsp3_vsldeparture_planned_last: null,
+      //   tsp3_vsldeparture_actual: null,
+      //   tsp3_vsldeparture_detected: null,
+      //   leg4_voyage: null,
+      //   tsp4_vslarrival_planned_initial: null,
+      //   tsp4_vslarrival_planned_last: null,
+      //   tsp4_vslarrival_actual: null,
+      //   tsp4_vslarrival_detected: null,
+      //   tsp4_discharge_planned_initial: null,
+      //   tsp4_discharge_planned_last: null,
+      //   tsp4_discharge_actual: null,
+      //   tsp4_loaded_planned_initial: null,
+      //   tsp4_loaded_planned_last: null,
+      //   tsp4_loaded_actual: null,
+      //   tsp4_vsldeparture_planned_initial: null,
+      //   tsp4_vsldeparture_planned_last: null,
+      //   tsp4_vsldeparture_actual: null,
+      //   tsp4_vsldeparture_detected: null,
+      //   leg5_voyage: null,
+      //   pod_vslarrival_planned_initial: "2021-10-25T16:00+0000",
+      //   pod_vslarrival_planned_last: "2021-10-25T15:41+0000",
+      //   pod_vslarrival_actual: null,
+      //   pod_vslarrival_detected: "2021-10-25T15:53+0000",
+      //   pod_discharge_planned_initial: null,
+      //   pod_discharge_planned_last: null,
+      //   pod_discharge_actual: "2021-10-26T14:54+0000",
+      //   pod_departure_planned_initial: null,
+      //   pod_departure_planned_last: null,
+      //   pod_departure_actual: "2021-10-27T19:12+0000",
+      //   lif_arrival_planned_initial: null,
+      //   lif_arrival_planned_last: null,
+      //   lif_arrival_actual: null,
+      //   lif_departure_planned_initial: null,
+      //   lif_departure_planned_last: null,
+      //   lif_departure_actual: null,
+      //   dlv_delivery_planned_initial: null,
+      //   dlv_delivery_planned_last: null,
+      //   dlv_delivery_actual: null,
+      //   empty_return_planned_initial: null,
+      //   empty_return_planned_last: null,
+      //   empty_return_actual: "2021-11-03T11:28+0000",
+      //   empty_return_customer: null,
+      //   ts_count: 2,
+      //   customs_release_state: null,
+      //   customs_release_date: null,
+      //   carrier_release_state: null,
+      //   carrier_release_date: null,
+      //   availability_date: null,
+      //   created: "2021-10-21T09:31+0000",
+      //   modified: "2021-11-03T13:47+0000",
+      // };
+      
+      
+      function initMap() {
+        const datas = JSON.parse(localStorage.getItem("datas"))
+        console.log(datas)
+        const trackPoints = JSON.parse(localStorage.getItem("points"))
+        console.log(trackPoints)
+        var DataArray = [];
+        var DataArray2 = [];
+        var pointArray = []
+
+        for (let key in datas.data) {
+          for (let word in datas.data[key]) {
+            if (word === "latitude" || word === "longitude") {
+              DataArray.push(datas.data[key]);
+              DataArray2[key] = datas.data[key];
+            }
+          }
+        }
+
+
+        trackPoints.data.map((point)=>{
+          let obj={
+            lat:point.latitude,
+            lng: point.longitude
+          }
+          pointArray.push(obj)
+        })
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          mapTypeId: "terrain",
+          gestureHandling: "cooperative",
+          // center: (lat: trackPoints.data[0].latitude ),
+          center: new google.maps.LatLng(trackPoints.data[0].latitude , trackPoints.data[0].longitude ),
+        });
+
+        // Define the symbol, using one of the predefined paths ('CIRCLE')
+        // supplied by the Google Maps JavaScript API.
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+          fillColor: "red",
+          scale: 5,
+          strokeOpacity: 1.5,
+        };
+
+        DataArray.map((data) => {
+          let marker = new google.maps.Marker({
+            position: { lat: data.latitude, lng: data.longitude },
+            map,
+          });
+        });
+
+          // Create the polyline and add the symbol to it via the 'icons' property.
+          // Create the polyline and add the symbol to it via the 'icons' property.
+          // var line2 = new google.maps.Polyline({
+          //   path: greenRouteData,
+          //   strokeColor: "#0f0",
+          //   strokeWeight: 15,
+          //   map: map,
+          // });
+
+          // var path = {lat : DataArray.latitude, lng: DataArray.longitude}
+          // console.log(path)
+          // var origin = {
+          //   lat: datas.data.origin_loc.latitude,
+          //   lng: datas.data.origin_loc.longitude,
+          // };
+          // var destination = {
+          //   lat: datas.data.tsp1_loc.latitude,
+          //   lng: datas.data.tsp1_loc.longitude,
+          // };
+          // var destination2 = {
+          //   lat: datas.data.tsp2_loc.latitude,
+          //   lng: datas.data.tsp2_loc.longitude,
+          // };
+          // var destination3 = {
+          //   lat: datas.data.dlv_loc.latitude,
+          //   lng: datas.data.dlv_loc.longitude,
+          // };
+          // var destination4 = {
+          //   lat: datas.data.pod_loc.latitude,
+          //   lat: datas.data.pod_loc.latitude,
+          //   lng: datas.data.pod_loc.longitude,
+          // };
+
+          // Create the polyline and add the symbol to it via the 'icons' property.
+          var line = new google.maps.Polyline({
+            path: pointArray,
+            icons: [
+              {
+                icon: lineSymbol,
+                offset: "100%",
+              },
+            ],
+            scale: 2,
+            // strokeColor: "#39b54a",
+            strokeColor: "rgb(32, 172, 236)",
+            strokeWeight: 4,
+            strokeOpacity: 1.5,
+            width: 8,
+            map: map,
+          });
+
+          animateCircle(line);
+
+          function animateCircle(line) {
+            var count = 0;
+            window.setInterval(function () {
+              count = (count + 1) % 200;
+
+              var icons = line.get("icons");
+              icons[0].offset = count / 2 + "%";
+              line.set("icons", icons);
+            }, 30);
+          }
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdUg5RYhac4wW-xnx-p0PrmKogycWz9pI&callback=initMap"
+    ></script>
+  </body>
+</html>
