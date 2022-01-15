@@ -8,8 +8,8 @@ export const COLUMNS = [
         accessor: "location",
     },
     {
-        Header: "Expected Date",
-        accessor: "Expected_Date",
+        Header: "Predicted Date",
+        accessor: "Predicted_Date",
     },
     {
         Header: "Actual Date",

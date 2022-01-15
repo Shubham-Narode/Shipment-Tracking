@@ -50,12 +50,19 @@
   border-color: #529bff;
   background: #529bff;
 }
+.progress-bar .step .bullet.noTSP {
+  border-color: #529bff;
+  background: #529bff;
+}
 .progress-bar .step .bullet span {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 .progress-bar .step .bullet.actives span {
+  display: none;
+}
+.progress-bar .step .bullet.noTSP span {
   display: none;
 }
 .progress-bar .step .bullet:before,
@@ -74,6 +81,18 @@
   transform-origin: left;
   animation: animate 0.3s linear forwards;
 }
+.progress-bar .step .bullet.noTSP:after {
+  position: absolute;
+  content: "";
+  bottom: 11px;
+  right: -141px;
+  height: 3px;
+  width: 141px;
+  background: #529bff;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.3s linear forwards;
+}
 @keyframes animate {
   100% {
     transform: scaleX(1);
@@ -87,6 +106,10 @@
   color: #529bff;
   transition: 0.2s linear;
 }
+.progress-bar .step p.noTSP {
+  color: #529bff;
+  transition: 0.2s linear;
+}
 .progress-bar .step .check {
   position: absolute;
   left: 50%;
@@ -96,6 +119,10 @@
   display: none;
 }
 .progress-bar .step .check.actives {
+  display: block;
+  color: #fff;
+}
+.progress-bar .step .check.noTSP {
   display: block;
   color: #fff;
 }

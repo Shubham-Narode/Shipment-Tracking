@@ -8,6 +8,7 @@ function Map() {
     <>
       <div className="map">
         <iframe
+        frameBorder="0"
           src="./map.html"
           width="1100px"
           height="500px"

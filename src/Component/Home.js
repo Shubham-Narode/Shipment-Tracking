@@ -1,28 +1,44 @@
-import React, { useEffect, useState } from "react";
-// import { NavLink } from "react-router-dom";
+import React, {  useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Home.css";
 import http from "./Services/httpsService";
 import { useNavigate } from "react-router-dom";
 import https from "./Services/geoTrackService";
-import Activity from "./Activity";
-import { Tabs, Tab } from "react-bootstrap";
-import Map from "./Map";
-import Details from "./Details"
+import HTTP from "./Services/mileStonesService";
+// import { Tabs, Tab } from "react-bootstrap";
+
+
 
 function Home() {
-  // const navigate = useNavigate();
 
-  const [value, setValue] = useState(null);
-  const [type, setType] = useState("Activity");
+  const navigate = useNavigate()
 
- 
+  const [value, setValue] = useState("");
+
+  function changeHandler(e){
+   setValue(e.target.value)
+  }
+  
+
+  useEffect(()=>{
+    const values = JSON.parse(localStorage.getItem("keepValue"))
+    if(value === ""){
+      setValue((pre)=> ({...pre, ...values}))
+    }
+  },[])
+
+
+  useEffect(()=>{
+    localStorage.setItem("keepValue", JSON.stringify(value))
+  },[value])
 
   function ClickHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
     console.log(value);
+    navigate(`/`)
     localStorage.removeItem("datas");
-    localStorage.removeItem("points");
-    // navigate("/activity");
+    localStorage.removeItem("trackPoints");
+  
     async function getData() {
       try {
         const receiveddata = await http.get(
@@ -40,11 +56,27 @@ function Home() {
           `/containertracking/v2/shipments/${value}/geotrack/`
         );
         const stringPointData = JSON.stringify(receivedPoints);
-        localStorage.setItem("points", stringPointData);
+        localStorage.setItem("trackPoints", stringPointData);
       } catch (error) {}
     }
     getTrackPoints();
+
+    async function getMilestonesData() {
+      try {
+        const receivedPoints = await HTTP.get(
+          `/containertracking/v2/shipments/${value}/`
+        );
+        const stringPointData = JSON.stringify(receivedPoints);
+        localStorage.setItem("milestonePoints", stringPointData);
+      } catch (error) {}
+    }
+    getMilestonesData();
   }
+
+  function backClickHandler (){
+    navigate(-1)
+  }
+
 
   return (
     <>
@@ -55,53 +87,41 @@ function Home() {
               type="number"
               className="app__search"
               placeholder="Tracking Number"
-              onChange={(e)=>setValue(e.target.value)}
+              onChange={changeHandler}
               value={value}
             />
-            {/* <input
-              type="search"
-              className="app__search"
-              placeholder="Tracking Number"
-              ref={textInput}
-            /> */}
           </div>
           <div>
             <button
               type="search"
               className="app__trackButton"
-              onClick={(e)=>ClickHandler(e)}
-              // disabled={disable}
+              onClick={(e) => ClickHandler(e)}
             >
               Track Shipment
             </button>
           </div>
-          {/* <div className="app__shipmentID">{`Shipment ID:${value}`}</div> */}
           <div>
-            <button className="app__backButton">Back</button>
+            <button className="app__backButton" onClick={backClickHandler}>Back</button>
           </div>
         </div>
         <div className="app__tabs">
-        </div>
-          <Tabs activeKey={type} onSelect={(k) => setType(k)}>
+          {/* <Tabs activeKey={type} onSelect={(k) => setType(k)}>
             <Tab eventKey="Activity" title="Activity">
-                <Activity />
+            {type === "Activity" && <Activity />}
             </Tab>
             <Tab eventKey="Map" title="Map">
-            {/* {(type === "Map")&&( */}
-              <Map />
-            {/* )} */}
+            {type === "Map" && <Map />}
             </Tab>
             <Tab eventKey="Details" title="Details">
-            {/* {(type === "Details")&&( */}
-              <Details />
-            {/* )} */}
+            {type === "Details" && <Details />}
             </Tab>
-          </Tabs>
-          {/* <NavLink
+          </Tabs> */}
+        
+          <NavLink
             to="/activity"
             className="app__activityTab"
             activeClassName="active"
-          >
+            >
             <div>Activity</div>
           </NavLink>
           <NavLink to="/map" className="app__mapTab">
@@ -109,7 +129,8 @@ function Home() {
           </NavLink>
           <NavLink to="/details" className="app__detailsTab">
             <div>Details</div>
-          </NavLink> */}
+          </NavLink>
+            </div>
       </div>
     </>
   );
