@@ -67,7 +67,7 @@ function Details(){
     return(
         <>
         {data && <div className="details__tag">
-            <div className="details__shipmentType">
+            <div className="details__shipmentTypess">
                 <div className="details__shipment">
                     Shipment Details
                 </div>
@@ -104,7 +104,7 @@ function Details(){
                     </span>
                 </div>
             </div>
-            <div className="details__containerType">
+            <div className="details__containerTypess">
                 <div className="details__container">
                     Container Details
                 </div>

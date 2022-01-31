@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Activity.css";
 import Milestones from "./React-Table/Milestones";
-import {COLUMNS} from "../Columns/Column"
+import {MAP_COLUMNS} from "../Columns/mapColumn"
 
 function Activity() {
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Map.css";
+import "../Map.css";
 
 
 function Map() {
@@ -9,7 +9,7 @@ function Map() {
       <div className="map">
         <iframe
         frameBorder="0"
-          src="./map.html"
+          src="./maps.html"
           width="1100px"
           height="500px"
           title="map"

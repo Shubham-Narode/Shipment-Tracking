@@ -1,4 +1,4 @@
-export const COLUMNS = [
+export const MAP_COLUMNS = [
     {
         Header: "Milestones",
         accessor: "Milestones",

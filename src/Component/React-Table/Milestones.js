@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable } from "react-table";
-import {COLUMNS} from "../../Columns/Column";
+import {MAP_COLUMNS} from "../../Columns/mapColumn";
 import "./Milestones.css"
 // import MilestoneTableData from './MilestoneTableData';
 
@@ -932,7 +932,7 @@ const Milestones = () => {
         prepareRow,
     } = useTable(
         {
-            columns: COLUMNS,
+            columns: MAP_COLUMNS,
             data
         }
         
